@@ -1,6 +1,6 @@
 <phpunit bootstrap="../vendor/autoload.php" colors="true">
 	<testsuites>
-        <testsuite name="zf-apigility-skeleton">
+        <testsuite bootstrap="./vendor/autoload.php" name="zf-apigility-skeleton">
             <directory>../module/Application/test</directory>
         </testsuite>
     </testsuites>
