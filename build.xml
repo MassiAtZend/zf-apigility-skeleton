@@ -191,14 +191,13 @@
 			</condition>
 		</fail>
 	</target>
-	<target name="package" unless="package.done" depends="prepare"
+	<target name="package" unless="package.done" depends="prepare,compinstall"
 		description="Generate project package for Zend deployment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="packaging">
 			<arg value="packZpk" />
 			<arg value="--folder=${basedir}" />
 			<arg value="--destination=${basedir}/build" />
 			<arg value="--name=apigility-skel.zpk" />
-			<arg value="--composer" />
 		</exec>
 		<property name="package.done" value="true" />
 	</target>
