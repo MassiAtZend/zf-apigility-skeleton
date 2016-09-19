@@ -36,7 +36,7 @@
 	</target>
 	<target name="symlink-phpcs" unless="symlink-phpcs.done"
 		description="Execute symlink to phpcs XML in build">
-		<symlink link="${basedir}/build/phpcs.xml" resource="${basedir}/php.xml"/>
+		<symlink link="${basedir}/phpcs.xml" resource="${basedir}/build/phpcs.xml"/>
 		<property name="symlink-phpcs.done" value="true" />
 	</target>
 	<target name="zs-targets" unless="zs-targets.done"
