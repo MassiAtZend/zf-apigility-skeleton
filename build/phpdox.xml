@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-	<project name="zf-rest" source="${basedir}/../" workdir="${basedir}/api/xml">
+	<project name="apigility-skeleton" source="${basedir}/" workdir="${basedir}/api/xml">
 		<collector publiconly="false">
 			<include mask="*.php" />
 			<exclude mask="*autoload.php" />
 		</collector>
-		<generator output="${basedir}/api">
+		<generator output="${basedir}/documentation">
 			<enrich base="${basedir}/../..">
 				<source type="build" />
 				<source type="checkstyle">
