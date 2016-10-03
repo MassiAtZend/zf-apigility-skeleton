@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-	<project name="apigility-skeleton" source="${basedir}/" workdir="${basedir}/api/xml">
+	<project name="apigility-skeleton" source="${basedir}/" workdir="${basedir}/phpdox/xml">
 		<collector publiconly="false">
 			<include mask="*.php" />
 			<exclude mask="*autoload.php" />

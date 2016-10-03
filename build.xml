@@ -11,7 +11,7 @@
 	<property name="zsclient" value="/usr/local/zend/bin/zs-client.sh" />
 	<property file="/var/jenkins/zs.properties" />
 	<target name="clean" unless="clean.done" description="Cleanup build artifacts">
-		<delete dir="${basedir}/build/api" />
+		<delete dir="${basedir}/build/documentation" />
 		<delete dir="${basedir}/build/coverage" />
 		<delete dir="${basedir}/build/logs" />
 		<delete dir="${basedir}/build/pdepend" />
@@ -20,7 +20,7 @@
 	</target>
 	<target name="prepare" unless="prepare.done" depends="clean"
 		description="Prepare for build">
-		<mkdir dir="${basedir}/build/api" />
+		<mkdir dir="${basedir}/build/documentation" />
 		<mkdir dir="${basedir}/build/coverage" />
 		<mkdir dir="${basedir}/build/logs" />
 		<mkdir dir="${basedir}/build/pdepend" />
@@ -177,7 +177,7 @@
 		</exec>
 		<property name="phpunit.done" value="true" />
 	</target>
-	<target name="phpdox" unless="phpdox.done" depends="prepare,phploc-ci,phpcs-ci,phpmd-ci"
+	<target name="phpdox" unless="phpdox.done" depends="prepare"
 		description="Generate project documentation using phpDox.">
 		<exec executable="${phpdox}" dir="${basedir}/build" taskname="phpdox" />
 		<property name="phpdox.done" value="true" />
