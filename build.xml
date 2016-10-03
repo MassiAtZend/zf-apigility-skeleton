@@ -34,10 +34,10 @@
 		</exec>
 		<property name="compinstall.done" value="true" />
 	</target>
-	<target name="symlink-phpcs" unless="symlink-phpcs.done"
-		description="Execute symlink to phpcs XML in build">
-		<symlink link="${basedir}/phpcs.xml" resource="${basedir}/build/phpcs.xml"/>
-		<property name="symlink-phpcs.done" value="true" />
+	<target name="copy-phpcs" unless="copy-phpcs.done"
+		description="Execute copy of phpcs XML in build">
+		<copy file="${basedir}/build/phpcs.xml" tofile="${basedir}/phpcs.xml"/>
+		<property name="copy-phpcs.done" value="true" />
 	</target>
 	<target name="zs-targets" unless="zs-targets.done"
 		description="Set up Zend Server targets for the pipeline">
@@ -124,7 +124,7 @@
 		</exec>
 		<property name="phpcs.done" value="true" />
 	</target>
-	<target name="phpcs-ci" unless="phpcs.done" depends="prepare, symlink-phpcs"
+	<target name="phpcs-ci" unless="phpcs.done" depends="prepare, copy-phpcs"
 		description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
 		<exec executable="${phpcs}" output="/dev/null" taskname="phpcs">
 			<arg value="--report=checkstyle" />
