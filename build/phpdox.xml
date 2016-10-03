@@ -3,7 +3,9 @@
 	<project name="apigility-skeleton" source="${basedir}/../" workdir="${basedir}/phpdox/xml">
 		<collector publiconly="false">
 			<include mask="*.php" />
-			<exclude mask="*autoload.php" />
+			<exclude mask="**vendor**" />
+			<exclude mask="**scripts**" />
+			<exclude mask="**build**" />
 		</collector>
 		<generator output="${basedir}/documentation">
 			<enrich base="${basedir}/logs">
