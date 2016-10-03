@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-	<project name="apigility-skeleton" source="${basedir}/" workdir="${basedir}/phpdox/xml">
+	<project name="apigility-skeleton" source="${basedir}/../" workdir="${basedir}/phpdox/xml">
 		<collector publiconly="false">
 			<include mask="*.php" />
 			<exclude mask="*autoload.php" />
 		</collector>
 		<generator output="${basedir}/documentation">
+			<enrich base="${basedir}/logs">
+				<source type="phploc">
+					<file name="phploc.xml" />
+				</source>
+				<source type="checkstyle">
+					<file name="checkstyle.xml" />
+				</source>
+				<source type="pmd">
+					<file name="pmd.xml" />
+				</source>
+			</enrich>
 			<build engine="html" output="html" />
 		</generator>
 	</project>
