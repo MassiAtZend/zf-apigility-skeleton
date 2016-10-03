@@ -167,30 +167,14 @@
 		</exec>
 		<property name="phpunit.done" value="true" />
 	</target>
-	<target name="phpunit-no-coverage" unless="phpunit.done"
-		depends="prepare"
-		description="Run unit tests with PHPUnit (without generating code coverage reports)">
-		<exec executable="${phpunit}" failonerror="true" taskname="phpunit">
-			<arg value="--configuration" />
-			<arg path="${basedir}/build/phpunit.xml" />
-			<arg value="--no-coverage" />
-		</exec>
-		<property name="phpunit.done" value="true" />
-	</target>
-	<target name="phpdox" unless="phpdox.done" depends="prepare"
-		description="Generate project documentation using phpDox.">
-		<exec executable="${phpdox}" dir="${basedir}/build" taskname="phpdox" />
-		<property name="phpdox.done" value="true" />
-	</target>
-	<target name="-check-failure">
-		<fail message="PHPUnit did not finish successfully">
-			<condition>
-				<not>
-					<equals arg1="${result.phpunit}" arg2="0" />
-				</not>
-			</condition>
-		</fail>
-	</target>
+	<target name="phpdox" depends="prepare,phploc-ci,phpcs-ci,phpmd-ci" unless="phpdox.done"
+		description="Generate HTML documentation usin PhpDOX.">
+        <exec executable="${phpdox}" dir="${basedir}/build" taskname="phpdox">
+            <arg value="--file" />
+            <arg value="${basedir}/build/phpdox.xml" />
+        </exec>
+        <property name="phpdox.done" value="true" />
+    </target>
 	<target name="package" unless="package.done" depends="prepare"
 		description="Generate project package for Zend deployment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="packaging">
