@@ -6,21 +6,6 @@
 			<exclude mask="*autoload.php" />
 		</collector>
 		<generator output="${basedir}/documentation">
-			<enrich base="${basedir}/../..">
-				<source type="build" />
-				<source type="checkstyle">
-					<file name="4_Checkstyle/build/logs/checkstyle.xml" />
-				</source>
-				<source type="pmd">
-					<file name="4_MessDetection/build/logs/pmd.xml" />
-				</source>
-				<source type="phploc">
-					<file name="4_LOC/build/logs/phploc.xml" />
-				</source>
-				<source type="phpunit">
-					<coverage path="3_UnitTesting/build/coverage/xml" />
-				</source>
-			</enrich>
 			<build engine="html" output="html" />
 		</generator>
 	</project>
