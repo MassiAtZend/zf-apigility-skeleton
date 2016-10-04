@@ -16,6 +16,7 @@
 		<delete dir="${basedir}/build/logs" />
 		<delete dir="${basedir}/build/pdepend" />
 		<delete dir="${basedir}/build/phpdox" />
+		<delete dir="${basedir}/build/code-browser" />
 		<property name="clean.done" value="true" />
 	</target>
 	<target name="prepare" unless="prepare.done" depends="clean"
@@ -25,6 +26,7 @@
 		<mkdir dir="${basedir}/build/logs" />
 		<mkdir dir="${basedir}/build/pdepend" />
 		<mkdir dir="${basedir}/build/phpdox" />
+		<mkdir dir="${basedir}/build/code-browser" />
 		<property name="prepare.done" value="true" />
 	</target>
 	<target name="compinstall" unless="compinstall.done"
@@ -179,6 +181,13 @@
         </exec>
         <property name="phpdox.done" value="true" />
     </target>
+	<target name="phpcb" depends="prepare">
+	    <exec executable="phpcb">
+	        <arg line="--log ${basedir}/build/logs/
+	                   --output ${basedir}/build/code-browser/
+	                   --source ${basedir}/" />
+	    </exec>
+	</target>
 	<target name="package" unless="package.done" depends="prepare"
 		description="Generate project package for Zend deployment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="packaging">
