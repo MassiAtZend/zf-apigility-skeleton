@@ -115,8 +115,6 @@
 			<arg path="${basedir}/build/phpmd.xml" />
 			<arg value="--reportfile" />
 			<arg path="${basedir}/build/logs/pmd.xml" />
-			<arg value="--exclude" />
-			<arg value="build,vendor,scripts" />
 		</exec>
 		<property name="phpmd.done" value="true" />
 	</target>
@@ -183,9 +181,11 @@
     </target>
 	<target name="phpcb" depends="prepare">
 	    <exec executable="phpcb">
-	        <arg line="--log ${basedir}/build/logs/
-	                   --output ${basedir}/build/code-browser/
-	                   --source ${basedir}/" />
+	        <arg line="--output ${basedir}/build/code-browser/
+	                   --source ${basedir}/
+					   --ignore ${$basedir}/vendor
+					   --ignore ${$basedir}/scripts"
+			/>
 	    </exec>
 	</target>
 	<target name="package" unless="package.done" depends="prepare"

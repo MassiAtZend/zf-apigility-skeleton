@@ -3,6 +3,8 @@
 	<project name="apigility-skeleton" source="${basedir}/../" workdir="${basedir}/phpdox/xml">
 		<collector publiconly="false">
 			<include mask="*.php" />
+			<exclude mask="**vendor**"/>
+			<exclude mask="**scripts**"/>
 		</collector>
 		<generator output="${basedir}/documentation">
 			<enrich base="${basedir}/logs">
@@ -20,4 +22,3 @@
 		</generator>
 	</project>
 </phpdox>
-
