@@ -25,7 +25,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => InvokableFactory::class
         ],
     ],
     'view_manager' => [
@@ -42,6 +42,11 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            \Application\Service\GSManager\GSManager::class => InvokableFactory::class
         ],
     ],
 ];

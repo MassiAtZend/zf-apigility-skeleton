@@ -7,3 +7,5 @@ data/cache/*
 /.buildpath
 /.project
 /composer.lock
+
+tests/_output/*
