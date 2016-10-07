@@ -2,6 +2,6 @@ class_name: ApiTester
 modules:
     enabled:
         - REST:
-            url: http://test.apiskel:8888
+            url: http://test.apiskel
             depends: PhpBrowser
             part: Json
