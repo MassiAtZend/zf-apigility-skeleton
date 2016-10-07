@@ -8,8 +8,7 @@
     "zfcampus/zf-apigility-documentation" : "^1.2.2",
     "zfcampus/zf-development-mode" : "^3.0",
     "zendframework/zend-test" : "3.0.2",
-    "codeception/codeception": "*",
-    "zendframework/zend-i18n": "^2.7"
+    "zendframework/zend-i18n" : "^2.7"
   },
   "require-dev" : {
     "zendframework/zend-developer-tools" : "^1.1",
