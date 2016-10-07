@@ -16,11 +16,22 @@ return [
                     ],
                 ],
             ],
+            'continuous-delivery.rpc.init-app' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/initapp',
+                    'defaults' => [
+                        'controller' => 'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller',
+                        'action' => 'initApp',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
         'uri' => [
             0 => 'continuous-delivery.rest.zend-gs',
+            1 => 'continuous-delivery.rpc.init-app',
         ],
     ],
     'zf-rest' => [
@@ -50,6 +61,7 @@ return [
     'zf-content-negotiation' => [
         'controllers' => [
             'ContinuousDelivery\\V1\\Rest\\ZendGS\\Controller' => 'HalJson',
+            'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'ContinuousDelivery\\V1\\Rest\\ZendGS\\Controller' => [
@@ -57,9 +69,18 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller' => [
+                0 => 'application/vnd.continuous-delivery.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+            ],
         ],
         'content_type_whitelist' => [
             'ContinuousDelivery\\V1\\Rest\\ZendGS\\Controller' => [
+                0 => 'application/vnd.continuous-delivery.v1+json',
+                1 => 'application/json',
+            ],
+            'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller' => [
                 0 => 'application/vnd.continuous-delivery.v1+json',
                 1 => 'application/json',
             ],
@@ -180,6 +201,20 @@ return [
                 'description' => 'The GS member email.',
                 'field_type' => 'array',
             ],
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller' => \ContinuousDelivery\V1\Rpc\InitApp\InitAppControllerFactory::class,
+        ],
+    ],
+    'zf-rpc' => [
+        'ContinuousDelivery\\V1\\Rpc\\InitApp\\Controller' => [
+            'service_name' => 'InitApp',
+            'http_methods' => [
+                0 => 'POST',
+            ],
+            'route_name' => 'continuous-delivery.rpc.init-app',
         ],
     ],
 ];
