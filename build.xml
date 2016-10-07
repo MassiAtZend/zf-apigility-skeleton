@@ -8,6 +8,8 @@
 	<property name="phpmd" value="phpmd" />
 	<property name="phpunit" value="phpunit" />
 	<property name="phpmetrics" value="phpmetrics" />
+	<property name="phpcb" value="phpcb" />
+	<property name="codecept" value="codecept" />
 	<property name="zsclient" value="/usr/local/zend/bin/zs-client.sh" />
 	<property file="/var/jenkins/zs.properties" />
 	<target name="clean" unless="clean.done" description="Cleanup build artifacts">
@@ -180,7 +182,7 @@
         <property name="phpdox.done" value="true" />
     </target>
 	<target name="phpcb" depends="prepare">
-	    <exec executable="phpcb">
+	    <exec executable="${phpcb}">
 	        <arg line="--output ${basedir}/build/code-browser/
 	                   --source ${basedir}/
 					   --ignore ${$basedir}/vendor
@@ -209,5 +211,12 @@
 			<arg value="--safe" />
 		</exec>
 		<property name="deploy-testing.done" value="true" />
+	</target>
+	<target name="codeception-testing" unless="codeception-testing.done"
+		description="Running codeception tests on the testing environment.">
+		<exec executable="${codecept}" failonerror="true" taskname="codeception-testing">
+			<arg line="run api --html" />
+		</exec>
+		<property name="codeception-testing.done" value="true" />
 	</target>
 </project>
