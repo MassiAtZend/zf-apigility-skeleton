@@ -46,7 +46,7 @@
 	</target>
 	<target name="zs-targets" unless="zs-targets.done"
 		description="Set up Zend Server targets for the pipeline">
-		<exec executable="${zsclient}" failonerror="true" taskname="zendserver targets">
+		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target testing">
 			<env key="HOME" value="/var/jenkins_home" />
 			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="addTarget" />
@@ -55,14 +55,14 @@
 			<arg value="--zssecret=${zs.testing.secret}" />
 			<arg value="--zsurl=${zs.testing.url}" />
 		</exec>
-		<exec executable="${zsclient}" failonerror="true" taskname="zendserver targets">
+		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target production">
 			<env key="HOME" value="/var/jenkins_home" />
 			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="addTarget" />
 			<arg value="--target=production" />
 			<arg value="--zskey=zend" />
 			<arg value="--zssecret=ymjimtbhmthhmznjzjyyzjizyjmzmmizztu3ndmzzdc1n2m2nzhjmme3zdaxnzyy" />
-			<arg value="--zsurl='http://52.57.177.93:10081'" />
+			<arg value="--zsurl=http://52.57.177.93:10081" />
 		</exec>
 		<property name="zs-targets.done" value="true" />
 	</target>
