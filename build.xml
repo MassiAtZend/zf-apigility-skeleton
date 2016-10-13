@@ -10,6 +10,7 @@
 	<property name="phpmetrics" value="phpmetrics" />
 	<property name="phpcb" value="phpcb" />
 	<property name="codecept" value="codecept" />
+	<property name="composer" value="composer" />
 	<property name="zsclient" value="/usr/local/zend/bin/zs-client.sh" />
 	<property file="/var/jenkins/zs.properties" />
 	<target name="clean" unless="clean.done" description="Cleanup build artifacts">
@@ -33,8 +34,8 @@
 	</target>
 	<target name="compinstall" unless="compinstall.done"
 		description="Perform composer installation">
-		<exec executable="composer" taskname="composer install">
-			<arg value="install" />
+		<exec executable="${composer}" taskname="composer install">
+			<arg line="-n install" />
 		</exec>
 		<property name="compinstall.done" value="true" />
 	</target>
