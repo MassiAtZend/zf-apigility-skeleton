@@ -31,7 +31,7 @@ $pwd = __DIR__;
 $deploymentDir = getenv('ZS_APPLICATION_BASE_DIR');
 if (is_dir($deploymentDir)) {
     chdir($deploymentDir);
-    $out = shell_exec('cp config/development.config.php.dist config/development.config.php');
+    $out = shell_exec('chmod 777 data/cache');
     chdir($pwd);
     exit(0);
 } else {
