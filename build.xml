@@ -54,7 +54,16 @@
 			<arg value="--zssecret=${zs.testing.secret}" />
 			<arg value="--zsurl=${zs.testing.url}" />
 		</exec>
-		<property name="compinstall.done" value="true" />
+		<exec executable="${zsclient}" failonerror="true" taskname="zendserver targets">
+			<env key="HOME" value="/var/jenkins_home" />
+			<env key="HTTP_TIMEOUT" value="30" />
+			<arg value="addTarget" />
+			<arg value="--target=production" />
+			<arg value="--zskey=zend" />
+			<arg value="--zssecret=ymjimtbhmthhmznjzjyyzjizyjmzmmizztu3ndmzzdc1n2m2nzhjmme3zdaxnzyy" />
+			<arg value="--zsurl='http://52.57.177.93:10081'" />
+		</exec>
+		<property name="zs-targets.done" value="true" />
 	</target>
 	<target name="lint" unless="lint.done"
 		description="Perform syntax check of sourcecode files">
@@ -210,6 +219,18 @@
 			<arg value="--safe" />
 		</exec>
 		<property name="deploy-testing.done" value="true" />
+	</target>
+	<target name="deploy-production" unless="deploy-production.done" depends="zs-targets"
+		description="Deploying the analyzed package to the production environment.">
+		<exec executable="${zsclient}" failonerror="true" taskname="deploy-production">
+			<arg value="installApp" />
+			<arg value="--zpk=${basedir}/build/apigility-skel.zpk" />
+			<arg value="--target=production" />
+			<arg value="--baseUri=http://apiskel/" />
+			<arg value="--createVhost=true" />
+			<arg value="--safe" />
+		</exec>
+		<property name="deploy-production.done" value="true" />
 	</target>
 	<target name="codeception-testing" unless="codeception-testing.done"
 		description="Running codeception tests on the testing environment.">
