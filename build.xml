@@ -63,7 +63,7 @@
 			<arg value="addTarget" />
 			<arg value="--target=production" />
 			<arg value="--zskey=zend" />
-			<arg value="--zssecret=ymjimtbhmthhmznjzjyyzjizyjmzmmizztu3ndmzzdc1n2m2nzhjmme3zdaxnzyy" />
+			<arg value="--zssecret=f2f7ffcb00199d5cc251278fd17201a95e01724d77efa03d60fc0113d1044e19" />
 			<arg value="--zsurl=http://52.57.177.93:10081" />
 		</exec>
 		<property name="zs-target-production.done" value="true" />
