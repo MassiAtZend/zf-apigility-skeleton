@@ -44,8 +44,8 @@
 		<copy file="${basedir}/build/phpcs.xml" tofile="${basedir}/phpcs.xml"/>
 		<property name="copy-phpcs.done" value="true" />
 	</target>
-	<target name="zs-targets" unless="zs-targets.done"
-		description="Set up Zend Server targets for the pipeline">
+	<target name="zs-target-testing" unless="zs-target-testing.done"
+		description="Set up Zend Server 'testing' target for the pipeline">
 		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target testing">
 			<env key="HOME" value="/var/jenkins_home" />
 			<env key="HTTP_TIMEOUT" value="30" />
@@ -55,6 +55,10 @@
 			<arg value="--zssecret=${zs.testing.secret}" />
 			<arg value="--zsurl=${zs.testing.url}" />
 		</exec>
+		<property name="zs-target-testing.done" value="true" />
+	</target>
+	<target name="zs-target-production" unless="zs-target-production.done"
+		description="Set up Zend Server 'production' target for the pipeline">
 		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target production">
 			<env key="HOME" value="/var/jenkins_home" />
 			<env key="HTTP_TIMEOUT" value="30" />
@@ -64,7 +68,7 @@
 			<arg value="--zssecret=ymjimtbhmthhmznjzjyyzjizyjmzmmizztu3ndmzzdc1n2m2nzhjmme3zdaxnzyy" />
 			<arg value="--zsurl=http://52.57.177.93:10081" />
 		</exec>
-		<property name="zs-targets.done" value="true" />
+		<property name="zs-target-production.done" value="true" />
 	</target>
 	<target name="lint" unless="lint.done"
 		description="Perform syntax check of sourcecode files">
@@ -209,7 +213,7 @@
 		</exec>
 		<property name="package.done" value="true" />
 	</target>
-	<target name="deploy-testing" unless="deploy-testing.done" depends="zs-targets"
+	<target name="deploy-testing" unless="deploy-testing.done" depends="zs-target-testing"
 		description="Deploying the analyzed package to the testing environment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="deploy-testing">
 			<arg value="installApp" />
@@ -221,7 +225,7 @@
 		</exec>
 		<property name="deploy-testing.done" value="true" />
 	</target>
-	<target name="deploy-production" unless="deploy-production.done" depends="zs-targets"
+	<target name="deploy-production" unless="deploy-production.done" depends="zs-target-production"
 		description="Deploying the analyzed package to the production environment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="deploy-production">
 			<arg value="installApp" />
