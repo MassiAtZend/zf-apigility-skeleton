@@ -48,7 +48,6 @@
 		description="Set up Zend Server 'testing' target for the pipeline">
 		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target testing">
 			<env key="HOME" value="/var/jenkins_home" />
-			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="addTarget" />
 			<arg value="--target=testing" />
 			<arg value="--zskey=${zs.testing.key}" />
@@ -61,7 +60,6 @@
 		description="Set up Zend Server 'production' target for the pipeline">
 		<exec executable="${zsclient}" failonerror="true" taskname="zendserver target production">
 			<env key="HOME" value="/var/jenkins_home" />
-			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="addTarget" />
 			<arg value="--target=production" />
 			<arg value="--zskey=zend" />
@@ -216,6 +214,8 @@
 	<target name="deploy-testing" unless="deploy-testing.done" depends="zs-target-testing"
 		description="Deploying the analyzed package to the testing environment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="deploy-testing">
+			<env key="HOME" value="/var/jenkins_home" />
+			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="installApp" />
 			<arg value="--zpk=${basedir}/build/apigility-skel.zpk" />
 			<arg value="--target=testing" />
@@ -228,6 +228,8 @@
 	<target name="deploy-production" unless="deploy-production.done" depends="zs-target-production"
 		description="Deploying the analyzed package to the production environment.">
 		<exec executable="${zsclient}" failonerror="true" taskname="deploy-production">
+			<env key="HOME" value="/var/jenkins_home" />
+			<env key="HTTP_TIMEOUT" value="30" />
 			<arg value="installApp" />
 			<arg value="--zpk=${basedir}/build/apigility-skel.zpk" />
 			<arg value="--target=production" />
