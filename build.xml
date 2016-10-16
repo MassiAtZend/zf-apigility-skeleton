@@ -246,4 +246,15 @@
 		</exec>
 		<property name="codeception-testing.done" value="true" />
 	</target>
+	<target name="app-rollback" unless="app-rollback.done"
+		description="Rolling back the application in case production tests fail.">
+		<exec executable="${zsclient}" failonerror="true" taskname="deploy-production">
+			<env key="HOME" value="/var/jenkins_home" />
+			<env key="HTTP_TIMEOUT" value="30" />
+			<arg value="applicationRollback" />
+			<arg value="--appId=3" />
+			<arg value="--target=production" />
+		</exec>
+		<property name="app-rollback.done" value="true" />
+	</target>
 </project>
